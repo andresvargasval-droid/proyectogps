@@ -20,10 +20,11 @@ export class DevicesService {
   // Crear dispositivo para el usuario autenticado
   async createForUser(dto: CreateDeviceDto, userId: string) {
     const device = this.devicesRepo.create({
-      serial: dto.serial,
-      name: dto.name,
-      status: DeviceStatus.PENDING, // ajusta si tu enum usa otro nombre
+      imei: dto.imei,
+      model: dto.model,
+      status: DeviceStatus.PENDING,
       user: { id: userId } as any,
+      vehicleId: null,
     });
 
     return this.devicesRepo.save(device);
