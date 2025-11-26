@@ -23,6 +23,14 @@ export class VehiclesService {
 
   // Crear vehículo para el usuario autenticado
   async createForUser(dto: CreateVehicleDto, userId: string) {
+    const existingPlate = await this.vehiclesRepo.findOne({
+      where: { plate: dto.plate },
+    });
+
+    if (existingPlate) {
+      throw new BadRequestException(MESSAGES.VEHICLES.PLATE_EXISTS);
+    }
+
     const vehicle = this.vehiclesRepo.create({
       name: dto.name,
       plate: dto.plate,
@@ -33,6 +41,32 @@ export class VehiclesService {
     });
 
     return this.vehiclesRepo.save(vehicle);
+  }
+
+  async removeForUser(vehicleId: string, userId: string) {
+    const vehicle = await this.vehiclesRepo.findOne({
+      where: { id: vehicleId, user: { id: userId } },
+    });
+
+    if (!vehicle) {
+      throw new NotFoundException(MESSAGES.VEHICLES.NOT_FOUND);
+    }
+
+    if (vehicle.deviceId) {
+      const device = await this.devicesRepo.findOne({
+        where: { id: vehicle.deviceId },
+      });
+
+      if (device) {
+        device.vehicleId = null;
+        device.status = DeviceStatus.AVAILABLE;
+        await this.devicesRepo.save(device);
+      }
+    }
+
+    await this.vehiclesRepo.remove(vehicle);
+
+    return vehicle;
   }
 
   // Ver vehículos del usuario
@@ -73,6 +107,7 @@ export class VehiclesService {
       throw new BadRequestException(MESSAGES.DEVICES.NOT_APPROVED);
     }
 
+    device.vehicleId = vehicle.id;
     device.status = DeviceStatus.ASSIGNED;
     await this.devicesRepo.save(device);
 

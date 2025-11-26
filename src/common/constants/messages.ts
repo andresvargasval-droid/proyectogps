@@ -7,25 +7,35 @@ export const MESSAGES = {
     LOGOUT_SUCCESS: 'Sesión cerrada correctamente',
     REFRESH_SUCCESS: 'Token renovado correctamente',
     PROFILE_SUCCESS: 'Perfil obtenido correctamente',
+    REQUEST_OTP_SUCCESS: 'OTP enviado correctamente',
+    VERIFY_OTP_SUCCESS: 'OTP verificado correctamente',
 
     INVALID_CREDENTIALS: 'Credenciales inválidas',
     USER_NOT_FOUND: 'Usuario no encontrado',
     USER_ALREADY_EXISTS: 'Ya existe un usuario con este email',
     UNAUTHORIZED: 'No autorizado',
+    OTP_NOT_FOUND: 'No hay un OTP vigente para este usuario',
+    OTP_EXPIRED: 'El OTP ha expirado, solicita uno nuevo',
+    OTP_INVALID: 'El código OTP es inválido',
   },
 
   VEHICLES: {
     CREATE_SUCCESS: 'Vehículo creado correctamente',
+    DELETE_SUCCESS: 'Vehículo eliminado correctamente',
     LIST_SUCCESS: 'Vehículos obtenidos correctamente',
     ASSIGN_DEVICE_SUCCESS: 'Dispositivo asignado correctamente',
     UNASSIGN_DEVICE_SUCCESS: 'Dispositivo desasignado correctamente',
+    TRANSFER_SUCCESS: 'Dispositivo trasladado correctamente',
 
     NOT_FOUND: 'Vehículo no encontrado',
     ALREADY_HAS_DEVICE: 'Este vehículo ya tiene un dispositivo asignado',
+    PLATE_EXISTS: 'Ya existe un vehículo con esta placa',
+    TRANSFER_TARGET_REQUIRED: 'Debes indicar un vehículo existente o los datos de uno nuevo',
   },
 
   DEVICES: {
     CREATE_SUCCESS: 'Dispositivo registrado correctamente',
+    DELETE_SUCCESS: 'Dispositivo eliminado correctamente',
     LIST_SUCCESS: 'Dispositivos obtenidos correctamente',
     APPROVE_SUCCESS: 'Dispositivo aprobado correctamente',
     REJECT_SUCCESS: 'Dispositivo rechazado correctamente',
