@@ -9,12 +9,17 @@ import { Repository } from 'typeorm';
 import { Device, DeviceStatus } from './device.entity';
 import { CreateDeviceDto } from './dto/create-device.dto';
 import { MESSAGES } from '../common/constants/messages';
+import { Vehicle, VehicleStatus } from '../vehicles/vehicle.entity';
+import { TransferDeviceDto } from './dto/transfer-device.dto';
 
 @Injectable()
 export class DevicesService {
   constructor(
     @InjectRepository(Device)
     private readonly devicesRepo: Repository<Device>,
+
+    @InjectRepository(Vehicle)
+    private readonly vehiclesRepo: Repository<Vehicle>,
   ) {}
 
   // Crear dispositivo para el usuario autenticado

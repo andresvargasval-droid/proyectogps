@@ -21,16 +21,21 @@ export const MESSAGES = {
 
   VEHICLES: {
     CREATE_SUCCESS: 'Vehículo creado correctamente',
+    DELETE_SUCCESS: 'Vehículo eliminado correctamente',
     LIST_SUCCESS: 'Vehículos obtenidos correctamente',
     ASSIGN_DEVICE_SUCCESS: 'Dispositivo asignado correctamente',
     UNASSIGN_DEVICE_SUCCESS: 'Dispositivo desasignado correctamente',
+    TRANSFER_SUCCESS: 'Dispositivo trasladado correctamente',
 
     NOT_FOUND: 'Vehículo no encontrado',
     ALREADY_HAS_DEVICE: 'Este vehículo ya tiene un dispositivo asignado',
+    PLATE_EXISTS: 'Ya existe un vehículo con esta placa',
+    TRANSFER_TARGET_REQUIRED: 'Debes indicar un vehículo existente o los datos de uno nuevo',
   },
 
   DEVICES: {
     CREATE_SUCCESS: 'Dispositivo registrado correctamente',
+    DELETE_SUCCESS: 'Dispositivo eliminado correctamente',
     LIST_SUCCESS: 'Dispositivos obtenidos correctamente',
     APPROVE_SUCCESS: 'Dispositivo aprobado correctamente',
     REJECT_SUCCESS: 'Dispositivo rechazado correctamente',

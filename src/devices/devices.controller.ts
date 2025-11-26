@@ -2,6 +2,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Post,
   UseGuards,
@@ -15,6 +16,7 @@ import { ApiResponse } from '../common/dto/api-response.dto';
 import { MESSAGES } from '../common/constants/messages';
 import { Device } from './device.entity';
 import { CreateDeviceDto } from './dto/create-device.dto';
+import { TransferDeviceDto } from './dto/transfer-device.dto';
 
 @Controller('devices')
 export class DevicesController {
@@ -62,5 +64,35 @@ export class DevicesController {
     );
 
     return ok(MESSAGES.DEVICES.APPROVE_SUCCESS, device);
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Delete(':deviceId')
+  async deleteDevice(
+    @Param('deviceId') deviceId: string,
+    @GetUser() user: any,
+  ): Promise<ApiResponse<Device>> {
+    const device = await this.devicesService.removeForUser(
+      deviceId,
+      user.userId,
+    );
+
+    return ok(MESSAGES.DEVICES.DELETE_SUCCESS, device);
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Post(':deviceId/transfer')
+  async transferDevice(
+    @Param('deviceId') deviceId: string,
+    @Body() dto: TransferDeviceDto,
+    @GetUser() user: any,
+  ): Promise<ApiResponse<{ device: Device; vehicle: any }>> {
+    const result = await this.devicesService.transferToVehicle(
+      user.userId,
+      deviceId,
+      dto,
+    );
+
+    return ok(MESSAGES.VEHICLES.TRANSFER_SUCCESS, result);
   }
 }

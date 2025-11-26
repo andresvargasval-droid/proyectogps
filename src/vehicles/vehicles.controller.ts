@@ -2,6 +2,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
@@ -30,6 +31,20 @@ export class VehiclesController {
     const vehicle = await this.vehiclesService.createForUser(dto, user.userId);
 
     return ok(MESSAGES.VEHICLES.CREATE_SUCCESS, vehicle);
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Delete(':vehicleId')
+  async deleteVehicle(
+    @Param('vehicleId') vehicleId: string,
+    @GetUser() user: any,
+  ): Promise<ApiResponse<Vehicle>> {
+    const vehicle = await this.vehiclesService.removeForUser(
+      vehicleId,
+      user.userId,
+    );
+
+    return ok(MESSAGES.VEHICLES.DELETE_SUCCESS, vehicle);
   }
 
   @UseGuards(AuthGuard('jwt'))
