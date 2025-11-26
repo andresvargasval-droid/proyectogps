@@ -7,11 +7,16 @@ export const MESSAGES = {
     LOGOUT_SUCCESS: 'Sesión cerrada correctamente',
     REFRESH_SUCCESS: 'Token renovado correctamente',
     PROFILE_SUCCESS: 'Perfil obtenido correctamente',
+    REQUEST_OTP_SUCCESS: 'OTP enviado correctamente',
+    VERIFY_OTP_SUCCESS: 'OTP verificado correctamente',
 
     INVALID_CREDENTIALS: 'Credenciales inválidas',
     USER_NOT_FOUND: 'Usuario no encontrado',
     USER_ALREADY_EXISTS: 'Ya existe un usuario con este email',
     UNAUTHORIZED: 'No autorizado',
+    OTP_NOT_FOUND: 'No hay un OTP vigente para este usuario',
+    OTP_EXPIRED: 'El OTP ha expirado, solicita uno nuevo',
+    OTP_INVALID: 'El código OTP es inválido',
   },
 
   VEHICLES: {

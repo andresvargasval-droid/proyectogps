@@ -12,7 +12,7 @@ import { VehiclesService } from './vehicles.service';
 import { GetUser } from '../auth/get-user.decorator';
 import { AssignDeviceDto } from './dto/assign-device.dto';
 import { CreateVehicleDto } from './dto/create-vehicle.dto';
-import { ok } from '../utils/response.util';
+import { ok } from '../common/utils/response.util';
 import { ApiResponse } from '../common/dto/api-response.dto';
 import { Vehicle } from './vehicle.entity';
 import { MESSAGES } from '../common/constants/messages';
