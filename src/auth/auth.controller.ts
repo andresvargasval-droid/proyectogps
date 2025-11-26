@@ -7,17 +7,37 @@ import {
   Get,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { ok } from '../utils/response.util';
+import { ok } from '../common/utils/response.util';
 import { ApiResponse } from '../common/dto/api-response.dto';
 import { MESSAGES } from '../common/constants/messages';
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from './get-user.decorator';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
+import { RequestOtpDto } from './dto/request-otp.dto';
+import { VerifyOtpDto } from './dto/verify-otp.dto';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
+
+  @Post('request-otp')
+  async requestOtp(
+    @Body() dto: RequestOtpDto,
+  ): Promise<ApiResponse<{ email: string; expiresAt: Date }>> {
+    const result = await this.authService.requestOtp(dto);
+
+    return ok(MESSAGES.AUTH.REQUEST_OTP_SUCCESS, result);
+  }
+
+  @Post('verify-otp')
+  async verifyOtp(
+    @Body() dto: VerifyOtpDto,
+  ): Promise<ApiResponse<{ accessToken: string; user: any }>> {
+    const result = await this.authService.verifyOtp(dto);
+
+    return ok(MESSAGES.AUTH.VERIFY_OTP_SUCCESS, result);
+  }
 
   @Post('register')
   async register(

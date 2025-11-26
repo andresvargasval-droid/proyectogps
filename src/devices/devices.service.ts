@@ -38,6 +38,13 @@ export class DevicesService {
     });
   }
 
+  async findPending() {
+    return this.devicesRepo.find({
+      where: { status: DeviceStatus.PENDING },
+      order: { createdAt: 'DESC' },
+    });
+  }
+
   // Aprobar dispositivo (ejemplo para rol admin)
   async approveDevice(deviceId: string, adminUserId: string) {
     const device = await this.devicesRepo.findOne({
