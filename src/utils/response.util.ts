@@ -1,5 +1,5 @@
-// src/common/utils/response.util.ts
-import { ApiResponse } from '../dto/api-response.dto';
+// src/utils/response.util.ts
+import { ApiResponse } from '../common/dto/api-response.dto';
 
 export const ok = <T = any>(
   message: string,
