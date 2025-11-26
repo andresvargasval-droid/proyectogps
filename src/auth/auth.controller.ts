@@ -7,7 +7,7 @@ import {
   Get,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { ok } from '../utils/response.util';
+import { ok } from '../common/utils/response.util';
 import { ApiResponse } from '../common/dto/api-response.dto';
 import { MESSAGES } from '../common/constants/messages';
 import { AuthGuard } from '@nestjs/passport';
