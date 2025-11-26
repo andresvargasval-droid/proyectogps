@@ -21,8 +21,8 @@ export class DevicesController {
   constructor(private readonly devicesService: DevicesService) {}
 
   @UseGuards(AuthGuard('jwt'))
-  @Post()
-  async createDevice(
+  @Post('request')
+  async requestDevice(
     @Body() dto: CreateDeviceDto,
     @GetUser() user: any,
   ): Promise<ApiResponse<Device>> {
@@ -37,6 +37,14 @@ export class DevicesController {
     @GetUser() user: any,
   ): Promise<ApiResponse<Device[]>> {
     const devices = await this.devicesService.findForUser(user.userId);
+
+    return ok(MESSAGES.DEVICES.LIST_SUCCESS, devices);
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Get('pending')
+  async getPendingDevices(): Promise<ApiResponse<Device[]>> {
+    const devices = await this.devicesService.findPending();
 
     return ok(MESSAGES.DEVICES.LIST_SUCCESS, devices);
   }
